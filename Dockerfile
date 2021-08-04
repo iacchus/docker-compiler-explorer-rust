@@ -7,6 +7,8 @@ RUN chmod +x script.sh
 
 RUN /root/script.sh
 
-CMD "bash"
+WORKDIR /root/compiler-explorer
+
+ENTRYPOINT "make"
 
 

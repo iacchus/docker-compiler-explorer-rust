@@ -4,7 +4,6 @@ GIT_STUFF="$HOME/git-stuff"
 
 ROOT_USER='root'
 ROOT_USER_HOME_DIR='/root'
-ROOT_USER_GIT_STUFF="$ROOT_USER_HOME_DIR/git-stuff"
 
 # UPDATE PACMAN'S PACKAGE DATABASES
 pacman -Syu --noconfirm
@@ -16,18 +15,19 @@ echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 locale-gen
 
 pacman --noconfirm -S \
-    curl \
     fd \
     git \
     make \
     neovim \
     nodejs-lts-erbium \
-    npm \
+    npm6 \
     ripgrep \
-    sudo
+    which
+
+#hash -r
 
 git clone https://github.com/compiler-explorer/compiler-explorer.git compiler-explorer
-cd compiler-explorer
-make
+
+#cd compiler-explorer
 
 echo "done."
