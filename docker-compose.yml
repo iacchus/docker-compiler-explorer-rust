@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  compiler-explorer:
+    build: .
+    ports:
+      - "10240:10240"
+    volumes:
+      - compiler-explorer:/root/compiler-explorer
