@@ -1,4 +1,4 @@
-FROM archlinux:latest
+FROM mercvrivs/compiler-explorer-archlinux:latest
 
 #VOLUME /opt/compiler-explorer
 ENV INSTALL_DIR=/opt
