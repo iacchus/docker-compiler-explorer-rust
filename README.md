@@ -1,5 +1,7 @@
 # docker-compiler-explorer-archlinux
 
+compiler-explorer docker image built on archlinux image
+
 ## building
 
 ```
@@ -12,4 +14,12 @@ docker build --network=host --tag mercvrivs/compiler-explorer-archlinux:latest .
 
 ```
 docker run -it mercvrivs/compiler-explorer-archlinux
+```
+
+## @ docker hub
+
+https://hub.docker.com/r/mercvrivs/compiler-explorer-archlinux
+
+```
+docker pull mercvrivs/compiler-explorer-archlinux
 ```
