@@ -1,8 +1,14 @@
 version: "3.9"
 services:
   compiler-explorer:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host
     ports:
       - "10240:10240"
     volumes:
-      - compiler-explorer:/root/compiler-explorer
+      - type: bind
+        source: ./compiler-explorer
+        target: /opt/compiler-explorer
+

@@ -1,18 +1,15 @@
 FROM archlinux:latest
 
-WORKDIR /root
+#VOLUME /opt/compiler-explorer
 
-#COPY script.sh /root
-#RUN chmod +x script.sh
+WORKDIR /opt
 
-#RUN /root/script.sh
+# SETUP LOCALES
+#RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+#RUN echo 'LANG=en_US.UTF-8' > /etc/locale.conf        
+#RUN locale-gen
 
-# SET LOCALE
-RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
-RUN echo 'LANG=en_US.UTF-8' > /etc/locale.conf        
-RUN locale-gen
-
-#RUN pacman -Syu --noconfirm
+# UPDATE AND INSTALL ARCHLINUX PACKAGES
 RUN pacman --noconfirm -Syu \
         fd \
         git \
@@ -23,10 +20,16 @@ RUN pacman --noconfirm -Syu \
         ripgrep \
         which
 
-RUN git clone https://github.com/compiler-explorer/compiler-explorer.git compiler-explorer
+# CLONE COMPILER-EXPLORER AT /root/compiler-explorer
+RUN git clone https://github.com/compiler-explorer/compiler-explorer.git \
+        compiler-explorer
 
-WORKDIR /root/compiler-explorer
+WORKDIR /opt/compiler-explorer
+
+RUN make prereqs
 
 ENTRYPOINT "make"
+
+CMD "run"
 
 
