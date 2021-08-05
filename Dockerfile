@@ -1,6 +1,8 @@
 FROM archlinux:latest
 
 #VOLUME /opt/compiler-explorer
+ENV INSTALL_DIR=/opt
+ENV APP_DIR=${INSTALL_DIR}/compiler-explorer
 
 WORKDIR /opt
 
@@ -10,6 +12,8 @@ WORKDIR /opt
 #RUN locale-gen
 
 # UPDATE AND INSTALL ARCHLINUX PACKAGES
+# CLONE COMPILER-EXPLORER AT /opt/compiler-explorer
+# PREPARE THE APP
 RUN pacman --noconfirm -Syu \
         fd \
         git \
@@ -18,15 +22,22 @@ RUN pacman --noconfirm -Syu \
         nodejs-lts-erbium \
         npm6 \
         ripgrep \
-        which
+        which \
+                \
+    && git clone https://github.com/compiler-explorer/compiler-explorer.git \
+        compiler-explorer \
+                            \
+    && make prereqs -C ${APP_DIR}
+
+
 
 # CLONE COMPILER-EXPLORER AT /root/compiler-explorer
-RUN git clone https://github.com/compiler-explorer/compiler-explorer.git \
-        compiler-explorer
+# RUN git clone https://github.com/compiler-explorer/compiler-explorer.git \
+#         compiler-explorer
 
-WORKDIR /opt/compiler-explorer
+#WORKDIR /opt/compiler-explorer
 
-RUN make prereqs
+#RUN make prereqs -C ${APP_DIR}
 
 ENTRYPOINT "make"
 
